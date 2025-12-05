@@ -1,11 +1,11 @@
-# 🛡️ json_guard  
+# 🛡️ json_type_guard  
 ### *Protector of Models. Warden of Types. Keeper of the Seven JSON Kingdoms.*
 
 A tiny, zero-codegen, runtime-safe JSON parsing helper for Dart & Flutter.  
 Stop guessing which field broke your `.fromJson`.  
 Stop seeing *“Null is not a subtype of…”* with no clue where it came from.
 
-`json_guard` gives you **precise, field-level errors**, safe parsing, optional fields, defaults, and full type validation — all without build runners, annotations, or boilerplate.
+`json_type_guard` gives you **precise, field-level errors**, safe parsing, optional fields, defaults, and full type validation — all without build runners, annotations, or boilerplate.
 
 ---
 
@@ -28,7 +28,7 @@ Stop seeing *“Null is not a subtype of…”* with no clue where it came from.
 
 ```yaml
 dependencies:
-  json_guard: ^1.0.0
+  json_type_guard: ^1.0.0
 ```
 
 ---
@@ -36,7 +36,7 @@ dependencies:
 ## 🎯 Quick Start
 
 ```dart
-import 'package:json_guard/json_guard.dart';
+import 'package:json_type_guard/json_type_guard.dart';
 
 class User {
   final String name;
@@ -143,7 +143,7 @@ try {
 ### Custom Error Themes
 
 ```dart
-import 'package:json_guard/json_guard.dart';
+import 'package:json_type_guard/json_type_guard.dart';
 
 GuardTheme.setTheme(
   errorPrefix: '🚨 CUSTOM ERROR:',
@@ -187,7 +187,7 @@ Guard.setDebugLogging(false); // Disable debug logs
 
 ## 🆚 Comparison
 
-| Feature | json_guard | json_serializable | Manual parsing |
+| Feature | json_type_guard | json_serializable | Manual parsing |
 |---------|-----------|-------------------|----------------|
 | Code generation | ❌ | ✅ | ❌ |
 | Build runner | ❌ | ✅ | ❌ |

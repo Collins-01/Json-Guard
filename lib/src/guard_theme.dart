@@ -1,4 +1,4 @@
-import 'package:json_guard/src/guard_style.dart';
+import 'package:json_type_guard/src/guard_style.dart';
 
 class GuardTheme {
   static String errorPrefix = GuardStyle.color(

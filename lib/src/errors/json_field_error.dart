@@ -1,4 +1,4 @@
-import 'package:json_guard/src/guard_theme.dart';
+import 'package:json_type_guard/src/guard_theme.dart';
 
 class JsonFieldError extends Error {
   /// this is the key causing the error

@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:json_guard/json_guard.dart';
+import 'package:json_type_guard/json_type_guard.dart';
 
 // Example 1: Basic User model
 class User {

@@ -1,4 +1,4 @@
-import 'package:json_guard/json_guard.dart';
+import 'package:json_type_guard/json_type_guard.dart';
 import 'package:test/test.dart';
 
 void main() {

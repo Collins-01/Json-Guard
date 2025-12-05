@@ -1,4 +1,4 @@
-import 'package:json_guard/src/errors/errors.dart';
+import 'package:json_type_guard/src/errors/errors.dart';
 
 class Guard {
   static bool _debug = false;
