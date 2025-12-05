@@ -1,10 +1,13 @@
-/// Support for doing something awesome.
+/// A tiny, zero-codegen, runtime-safe JSON parsing helper for Dart & Flutter.
 ///
-/// More dartdocs go here.
+/// Provides precise, field-level errors, safe parsing, optional fields, defaults,
+/// and full type validation — all without build runners, annotations, or boilerplate.
 library;
 
-export 'src/json_guard_base.dart';
-
-// TODO: Export any libraries intended for clients of this package.
+export 'src/guard.dart';
+export 'src/extensions.dart';
+export 'src/guard_style.dart';
+export 'src/guard_theme.dart';
+export 'src/errors/json_field_error.dart';
 
 

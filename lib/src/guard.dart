@@ -39,7 +39,7 @@ class Guard {
     final raw = json[key];
 
     if (raw == null || raw is! Map) {
-      JsonFieldError(key: key, expected: Map, received: raw);
+      throw JsonFieldError(key: key, expected: Map, received: raw);
     }
 
     return builder(raw);
