@@ -1,0 +1,133 @@
+{
+  "JSON Type Guard - Basic Model": {
+    "prefix": "jtg-model",
+    "body": [
+      "class ${1:ModelName} {",
+      "  final ${2:String} ${3:fieldName};",
+      "  $0",
+      "",
+      "  ${1:ModelName}.fromJson(Map json)",
+      "      : ${3:fieldName} = json.guard<${2:String}>('${3:fieldName}');",
+      "",
+      "  @override",
+      "  String toString() => '${1:ModelName}(${3:fieldName}: \\$${3:fieldName})';",
+      "}"
+    ],
+    "description": "Create a basic model with json_type_guard"
+  },
+  "JSON Type Guard - Required Field": {
+    "prefix": "jtg-field",
+    "body": [
+      "final ${1:String} ${2:fieldName};"
+    ],
+    "description": "Add a required field"
+  },
+  "JSON Type Guard - Optional Field": {
+    "prefix": "jtg-field-opt",
+    "body": [
+      "final ${1:String}? ${2:fieldName};"
+    ],
+    "description": "Add an optional field"
+  },
+  "JSON Type Guard - Parse Required": {
+    "prefix": "jtg-parse",
+    "body": [
+      "${1:fieldName} = json.guard<${2:String}>('${1:fieldName}')"
+    ],
+    "description": "Parse a required field"
+  },
+  "JSON Type Guard - Parse Optional": {
+    "prefix": "jtg-parse-opt",
+    "body": [
+      "${1:fieldName} = json.guardOrNull<${2:String}>('${1:fieldName}')"
+    ],
+    "description": "Parse an optional field"
+  },
+  "JSON Type Guard - Parse with Default": {
+    "prefix": "jtg-parse-default",
+    "body": [
+      "${1:fieldName} = json.guard<${2:String}>('${1:fieldName}', defaultValue: ${3:'default'})"
+    ],
+    "description": "Parse a field with default value"
+  },
+  "JSON Type Guard - Parse Nested Object": {
+    "prefix": "jtg-parse-object",
+    "body": [
+      "${1:fieldName} = json.guardObject<${2:ModelName}>('${1:fieldName}', ${2:ModelName}.fromJson)"
+    ],
+    "description": "Parse a nested object"
+  },
+  "JSON Type Guard - Parse List": {
+    "prefix": "jtg-parse-list",
+    "body": [
+      "${1:fieldName} = json.guardList<${2:String}>('${1:fieldName}', (v) => v as ${2:String})"
+    ],
+    "description": "Parse a list of primitives"
+  },
+  "JSON Type Guard - Parse List of Objects": {
+    "prefix": "jtg-parse-list-obj",
+    "body": [
+      "${1:fieldName} = json.guardList<${2:ModelName}>('${1:fieldName}', (v) => ${2:ModelName}.fromJson(v as Map))"
+    ],
+    "description": "Parse a list of objects"
+  },
+  "JSON Type Guard - Import": {
+    "prefix": "jtg-import",
+    "body": [
+      "import 'package:json_type_guard/json_type_guard.dart';"
+    ],
+    "description": "Import json_type_guard package"
+  },
+  "JSON Type Guard - Complete Model": {
+    "prefix": "jtg-model-full",
+    "body": [
+      "class ${1:User} {",
+      "  final String ${2:name};",
+      "  final int ${3:age};",
+      "  final String? ${4:email};",
+      "  final String ${5:role};",
+      "",
+      "  ${1:User}.fromJson(Map json)",
+      "      : ${2:name} = json.guard<String>('${2:name}'),",
+      "        ${3:age} = json.guard<int>('${3:age}'),",
+      "        ${4:email} = json.guardOrNull<String>('${4:email}'),",
+      "        ${5:role} = json.guard<String>('${5:role}', defaultValue: 'user');",
+      "",
+      "  @override",
+      "  String toString() => '${1:User}(${2:name}: \\$${2:name}, ${3:age}: \\$${3:age}, ${4:email}: \\$${4:email}, ${5:role}: \\$${5:role})';",
+      "}"
+    ],
+    "description": "Create a complete model with multiple field types"
+  },
+  "JSON Type Guard - Try Catch": {
+    "prefix": "jtg-try",
+    "body": [
+      "try {",
+      "  final ${1:model} = ${2:ModelName}.fromJson(${3:json});",
+      "  $0",
+      "} catch (e) {",
+      "  print('Error parsing JSON: \\$e');",
+      "}"
+    ],
+    "description": "Try-catch block for JSON parsing"
+  },
+  "JSON Type Guard - Custom Theme": {
+    "prefix": "jtg-theme",
+    "body": [
+      "GuardTheme.setTheme(",
+      "  errorPrefix: '${1:🚨 ERROR:}',",
+      "  fieldLabel: '${2:📍 Field}',",
+      "  expectedLabel: '${3:🎯 Expected}',",
+      "  receivedLabel: '${4:📦 Received}',",
+      ");"
+    ],
+    "description": "Set custom error theme"
+  },
+  "JSON Type Guard - Debug Mode": {
+    "prefix": "jtg-debug",
+    "body": [
+      "Guard.setDebugLogging(${1:true});"
+    ],
+    "description": "Toggle debug logging"
+  }
+}

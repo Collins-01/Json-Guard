@@ -199,6 +199,56 @@ Guard.setDebugLogging(false); // Disable debug logs
 
 ---
 
+## ⚡ VS Code Snippets
+
+Boost your productivity with built-in code snippets! The `.vscode` folder contains snippets for quick model generation.
+
+### Installation
+
+**Option 1: Copy to User Snippets (Recommended)**
+1. Open VS Code
+2. Press `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux)
+3. Type "Preferences: Configure User Snippets"
+4. Select "dart.json"
+5. Copy the contents from [.vscode/json_type_guard.code-snippets](.vscode/json_type_guard.code-snippets)
+
+**Option 2: Use in Your Project**
+1. Copy the `.vscode` folder to your project root
+2. Snippets will work automatically in that workspace
+
+### Available Snippets
+
+| Prefix | Description |
+|--------|-------------|
+| `jtg-import` | Import json_type_guard package |
+| `jtg-model` | Create a basic model with fromJson |
+| `jtg-model-full` | Complete model with multiple field types |
+| `jtg-parse` | Parse a required field |
+| `jtg-parse-opt` | Parse an optional field |
+| `jtg-parse-default` | Parse with default value |
+| `jtg-parse-object` | Parse nested object |
+| `jtg-parse-list` | Parse list of primitives |
+| `jtg-parse-list-obj` | Parse list of objects |
+
+### Quick Example
+
+Type `jtg-model` and press Tab:
+```dart
+class User {
+  final String name;
+
+  User.fromJson(Map json)
+      : name = json.guard<String>('name');
+
+  @override
+  String toString() => 'User(name: $name)';
+}
+```
+
+See [.vscode/README.md](.vscode/README.md) for more details.
+
+---
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
