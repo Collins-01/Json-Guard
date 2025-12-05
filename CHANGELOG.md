@@ -1,3 +1,9 @@
+## 1.0.1
+
+- Updated documentation and examples
+- Added comprehensive test suite
+- Improved error messages with theming support
+
 ## 1.0.0
 
 - Initial release
