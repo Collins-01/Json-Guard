@@ -1,3 +1,5 @@
+import 'package:json_guard/src/guard_theme.dart';
+
 class JsonFieldError extends Error {
   /// this is the key causing the error
   final String key;
@@ -16,7 +18,11 @@ class JsonFieldError extends Error {
 
   @override
   String toString() {
-    return 'JsonFieldError: Expected $expected for `$key`, but got '
-        '${received.runtimeType} ($received)';
+    return '''
+${GuardTheme.errorPrefix}
+  ${GuardTheme.fieldLabel}: "$key"
+  ${GuardTheme.expectedLabel}: $expected
+  ${GuardTheme.receivedLabel}: ${received.runtimeType} ($received)
+''';
   }
 }
