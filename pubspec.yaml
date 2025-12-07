@@ -1,6 +1,6 @@
 name: json_type_guard
 description: A tiny, zero-codegen, runtime-safe JSON parsing helper for Dart & Flutter with precise field-level error messages.
-version: 1.0.0
+version: 1.0.3
 repository: https://github.com/Collins-01/Json-Guard
 homepage: https://github.com/Collins-01/Json-Guard
 issue_tracker: https://github.com/Collins-01/Json-Guard/issues
