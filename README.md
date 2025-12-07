@@ -13,6 +13,7 @@ Stop seeing *“Null is not a subtype of…”* with no clue where it came from.
 
 - 🛡️ Runtime type-safe JSON access  
 - 🔎 Clear, explicit error messages  
+- 🗺️ **Path tracking in nested structures** (e.g., `"user.profile.email"`)
 - ❌ No code generation  
 - 🧩 No annotations  
 - 🎯 Zero boilerplate  
@@ -139,6 +140,59 @@ try {
   //   Received: String (30)
 }
 ```
+
+### Path Tracking in Nested Structures
+
+For deeply nested JSON, errors show the **full path** to the problematic field:
+
+```dart
+class Address {
+  final String city;
+  Address.fromJson(Map json) : city = json.guard<String>('city');
+}
+
+class Profile {
+  final String email;
+  final Address address;
+  
+  Profile.fromJson(Map json)
+      : email = json.guard<String>('email'),
+        address = json.guardObject<Address>('address', Address.fromJson);
+}
+
+class User {
+  final String name;
+  final Profile profile;
+  
+  User.fromJson(Map json)
+      : name = json.guard<String>('name'),
+        profile = json.guardObject<Profile>('profile', Profile.fromJson);
+}
+
+// JSON with nested error
+final json = {
+  'name': 'Alice',
+  'profile': {
+    'email': 'alice@example.com',
+    'address': {
+      'city': 12345  // Wrong type!
+    }
+  }
+};
+
+try {
+  final user = User.fromJson(json);
+} catch (e) {
+  print(e);
+  // Output shows FULL PATH:
+  // JsonGuardError:
+  //   Field: "profile.address.city"
+  //   Expected: String
+  //   Received: int (12345)
+}
+```
+
+This makes debugging nested structures **significantly easier** - you know exactly which field failed!
 
 ### Custom Error Themes
 

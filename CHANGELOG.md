@@ -1,3 +1,13 @@
+## 1.0.2
+
+- **New Feature**: Path tracking in error messages
+  - Error messages now show full path to fields in nested structures (e.g., `"user.profile.email"`)
+  - Makes debugging deeply nested JSON significantly easier
+  - Optional `path` parameter added to all Guard methods
+  - Fully backward compatible - existing code works unchanged
+- Added 7 comprehensive tests for path tracking
+- All 34 tests passing
+
 ## 1.0.1
 
 - Updated documentation and examples

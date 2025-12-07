@@ -8,3 +8,6 @@ pubspec.lock
 
 # VS Code extension development (not part of the package)
 vscode-extension/
+
+# Internal improvement ideas
+IMPROVEMENTS.md
