@@ -84,4 +84,111 @@ class Guard {
 
     return raw.map(convert).toList();
   }
+
+  /// Guard DateTime parsing
+  /// Supports ISO8601 strings, Unix timestamps (seconds), and Unix timestamps (milliseconds)
+  static DateTime dateTime(Map json, String key, {String? path}) {
+    final raw = json[key];
+    final fieldPath = path != null ? '$path.$key' : key;
+
+    if (raw == null) {
+      throw JsonFieldError(
+        key: key,
+        expected: DateTime,
+        received: null,
+        path: fieldPath,
+      );
+    }
+
+    // Try parsing as ISO8601 string
+    if (raw is String) {
+      try {
+        return DateTime.parse(raw);
+      } catch (e) {
+        throw JsonFieldError(
+          key: key,
+          expected: DateTime,
+          received: raw,
+          path: fieldPath,
+        );
+      }
+    }
+
+    // Try parsing as Unix timestamp (int)
+    if (raw is int) {
+      try {
+        // Determine if seconds or milliseconds based on magnitude
+        // Timestamps < 10,000,000,000 are in seconds (covers dates up to year 2286)
+        // Timestamps >= 10,000,000,000 are in milliseconds
+        if (raw < 10000000000) {
+          return DateTime.fromMillisecondsSinceEpoch(raw * 1000);
+        } else {
+          return DateTime.fromMillisecondsSinceEpoch(raw);
+        }
+      } catch (e) {
+        throw JsonFieldError(
+          key: key,
+          expected: DateTime,
+          received: raw,
+          path: fieldPath,
+        );
+      }
+    }
+
+    // Invalid type
+    throw JsonFieldError(
+      key: key,
+      expected: DateTime,
+      received: raw,
+      path: fieldPath,
+    );
+  }
+
+  /// Nullable DateTime parsing (returns null instead of error when missing)
+  static DateTime? dateTimeOrNull(Map json, String key, {String? path}) {
+    final raw = json[key];
+    final fieldPath = path != null ? '$path.$key' : key;
+
+    if (raw == null) return null;
+
+    // Try parsing as ISO8601 string
+    if (raw is String) {
+      try {
+        return DateTime.parse(raw);
+      } catch (e) {
+        throw JsonFieldError(
+          key: key,
+          expected: DateTime,
+          received: raw,
+          path: fieldPath,
+        );
+      }
+    }
+
+    // Try parsing as Unix timestamp (int)
+    if (raw is int) {
+      try {
+        if (raw < 10000000000) {
+          return DateTime.fromMillisecondsSinceEpoch(raw * 1000);
+        } else {
+          return DateTime.fromMillisecondsSinceEpoch(raw);
+        }
+      } catch (e) {
+        throw JsonFieldError(
+          key: key,
+          expected: DateTime,
+          received: raw,
+          path: fieldPath,
+        );
+      }
+    }
+
+    // Invalid type
+    throw JsonFieldError(
+      key: key,
+      expected: DateTime,
+      received: raw,
+      path: fieldPath,
+    );
+  }
 }

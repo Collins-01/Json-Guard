@@ -120,6 +120,39 @@ final tags = json.guardList<String>('tags', (v) => v as String);
 final users = json.guardList<User>('users', (v) => User.fromJson(v as Map));
 ```
 
+### DateTime Fields
+
+```dart
+class Event {
+  final String name;
+  final DateTime createdAt;
+  final DateTime? updatedAt;
+  
+  Event.fromJson(Map json)
+      : name = json.guard<String>('name'),
+        createdAt = json.guardDateTime('created_at'),
+        updatedAt = json.guardDateTimeOrNull('updated_at');
+}
+
+// Works with ISO8601 strings
+final json1 = {
+  'name': 'Meeting',
+  'created_at': '2024-12-07T10:30:00Z',
+};
+
+// Works with Unix timestamps (seconds)
+final json2 = {
+  'name': 'Conference',
+  'created_at': 1701950400,
+};
+
+// Works with Unix timestamps (milliseconds)
+final json3 = {
+  'name': 'Workshop',
+  'created_at': 1701950400000,
+};
+```
+
 ---
 
 ## 🚨 Error Handling

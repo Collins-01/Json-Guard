@@ -385,4 +385,130 @@ void main() {
       }
     });
   });
+
+  group('DateTime parsing', () {
+    test('parses ISO8601 string successfully', () {
+      final json = {'created_at': '2024-12-07T10:30:00Z'};
+
+      final result = Guard.dateTime(json, 'created_at');
+      expect(result, isA<DateTime>());
+      expect(result.year, equals(2024));
+      expect(result.month, equals(12));
+      expect(result.day, equals(7));
+    });
+
+    test('parses date-only ISO8601 string', () {
+      final json = {'date': '2024-12-07'};
+
+      final result = Guard.dateTime(json, 'date');
+      expect(result, isA<DateTime>());
+      expect(result.year, equals(2024));
+      expect(result.month, equals(12));
+      expect(result.day, equals(7));
+    });
+
+    test('parses Unix timestamp in seconds', () {
+      final json = {'timestamp': 1701950400}; // 2023-12-07 10:00:00 UTC
+
+      final result = Guard.dateTime(json, 'timestamp');
+      expect(result, isA<DateTime>());
+      expect(result.year, equals(2023));
+      expect(result.month, equals(12));
+    });
+
+    test('parses Unix timestamp in milliseconds', () {
+      final json = {'timestamp': 1701950400000}; // 2023-12-07 10:00:00 UTC
+
+      final result = Guard.dateTime(json, 'timestamp');
+      expect(result, isA<DateTime>());
+      expect(result.year, equals(2023));
+      expect(result.month, equals(12));
+    });
+
+    test('throws error for invalid ISO8601 string', () {
+      final json = {'date': 'invalid-date'};
+
+      expect(
+        () => Guard.dateTime(json, 'date'),
+        throwsA(isA<JsonFieldError>()),
+      );
+    });
+
+    test('throws error for invalid type', () {
+      final json = {'date': true};
+
+      expect(
+        () => Guard.dateTime(json, 'date'),
+        throwsA(isA<JsonFieldError>()),
+      );
+    });
+
+    test('throws error for missing required DateTime', () {
+      final json = {'name': 'test'};
+
+      expect(
+        () => Guard.dateTime(json, 'created_at'),
+        throwsA(isA<JsonFieldError>()),
+      );
+    });
+
+    test('dateTimeOrNull returns null when field is missing', () {
+      final json = {'name': 'test'};
+
+      final result = Guard.dateTimeOrNull(json, 'updated_at');
+      expect(result, isNull);
+    });
+
+    test('dateTimeOrNull returns null when field is null', () {
+      final json = {'updated_at': null};
+
+      final result = Guard.dateTimeOrNull(json, 'updated_at');
+      expect(result, isNull);
+    });
+
+    test('dateTimeOrNull parses valid DateTime', () {
+      final json = {'updated_at': '2024-12-07T15:30:00Z'};
+
+      final result = Guard.dateTimeOrNull(json, 'updated_at');
+      expect(result, isA<DateTime>());
+      expect(result!.year, equals(2024));
+    });
+
+    test('dateTimeOrNull throws on invalid format', () {
+      final json = {'updated_at': 'bad-date'};
+
+      expect(
+        () => Guard.dateTimeOrNull(json, 'updated_at'),
+        throwsA(isA<JsonFieldError>()),
+      );
+    });
+
+    test('extension method guardDateTime works', () {
+      final json = {'created_at': '2024-12-07T10:00:00Z'};
+
+      final result = json.guardDateTime('created_at');
+      expect(result, isA<DateTime>());
+      expect(result.year, equals(2024));
+    });
+
+    test('extension method guardDateTimeOrNull works', () {
+      final json = {'name': 'test'};
+
+      final result = json.guardDateTimeOrNull('updated_at');
+      expect(result, isNull);
+    });
+
+    test('DateTime error includes path tracking', () {
+      final json = {'date': 'invalid'};
+
+      try {
+        Guard.dateTime(json, 'date', path: 'event');
+        fail('Should have thrown JsonFieldError');
+      } catch (e) {
+        expect(e, isA<JsonFieldError>());
+        final error = e as JsonFieldError;
+        expect(error.path, equals('event.date'));
+      }
+    });
+  });
 }

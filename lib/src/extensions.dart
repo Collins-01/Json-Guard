@@ -11,4 +11,8 @@ extension JsonGuardExt on Map {
 
   T guardObject<T>(String key, T Function(Map m) builder) =>
       Guard.object(this, key, builder);
+
+  DateTime guardDateTime(String key) => Guard.dateTime(this, key);
+
+  DateTime? guardDateTimeOrNull(String key) => Guard.dateTimeOrNull(this, key);
 }

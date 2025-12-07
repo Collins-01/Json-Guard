@@ -1,3 +1,13 @@
+## 1.0.3
+
+- **New Feature**: DateTime parsing support
+  - Added `guardDateTime()` and `guardDateTimeOrNull()` methods
+  - Auto-detects format: ISO8601 strings, Unix timestamps (seconds/milliseconds)
+  - No manual conversion needed - just call `json.guardDateTime('created_at')`
+  - Fully backward compatible
+- Added 13 comprehensive tests for DateTime parsing
+- All 48 tests passing
+
 ## 1.0.2
 
 - **New Feature**: Path tracking in error messages
