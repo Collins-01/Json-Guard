@@ -18,7 +18,7 @@
 - Added 7 comprehensive tests for path tracking
 - All 34 tests passing
 
-## 1.0.2
+## 1.0.4
 
 - **BREAKING FIX**: Disabled ANSI colors by default for better compatibility
 - Error messages now display as plain text (no gibberish in logs)
