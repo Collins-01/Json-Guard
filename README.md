@@ -229,15 +229,34 @@ This makes debugging nested structures **significantly easier** - you know exact
 
 ### Custom Error Themes
 
-```dart
-import 'package:json_type_guard/json_type_guard.dart';
+By default, errors use plain text (no colors) for maximum compatibility:
 
+```dart
+// Default output (plain text)
+// JsonGuardError:
+//   Field: "age"
+//   Expected: int
+//   Received: String (30)
+```
+
+**Enable Colors for Terminal Output:**
+```dart
+GuardTheme.enableColors(); // Enable ANSI colors for terminal
+```
+
+**Custom Labels:**
+```dart
 GuardTheme.setTheme(
   errorPrefix: '🚨 CUSTOM ERROR:',
   fieldLabel: '📍 Field',
   expectedLabel: '🎯 Expected',
   receivedLabel: '📦 Received',
 );
+```
+
+**Disable Colors:**
+```dart
+GuardTheme.disableColors(); // Back to plain text
 ```
 
 ---

@@ -18,6 +18,14 @@
 - Added 7 comprehensive tests for path tracking
 - All 34 tests passing
 
+## 1.0.2
+
+- **BREAKING FIX**: Disabled ANSI colors by default for better compatibility
+- Error messages now display as plain text (no gibberish in logs)
+- Added `GuardTheme.enableColors()` for terminal users who want colored output
+- Added `GuardTheme.disableColors()` to explicitly disable colors
+- Improved error readability across all platforms (Flutter, web, terminal)
+
 ## 1.0.1
 
 - Updated documentation and examples

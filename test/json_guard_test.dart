@@ -240,6 +240,19 @@ void main() {
       expect(GuardTheme.expectedLabel, equals('Expected Type'));
       expect(GuardTheme.receivedLabel, equals('Received Type'));
     });
+
+    test('colors are disabled by default', () {
+      GuardTheme.disableColors(); // Reset to default
+      expect(GuardTheme.useColors, isFalse);
+      expect(GuardTheme.errorPrefix, equals('JsonGuardError:'));
+    });
+
+    test('colors can be enabled', () {
+      GuardTheme.enableColors();
+      expect(GuardTheme.useColors, isTrue);
+      expect(GuardTheme.errorPrefix, contains('JsonGuardError:'));
+      GuardTheme.disableColors(); // Reset
+    });
   });
 
   group('Integration tests', () {

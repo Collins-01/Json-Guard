@@ -185,8 +185,23 @@ void main() {
     log('❌ Error: $e');
   }
 
-  // Example 9: Debug logging
-  log('═══ Example 9: Debug Mode ═══');
+  // Example 9: Enable colors (for terminal output)
+  log('═══ Example 9: Enable Colors ═══');
+  GuardTheme.enableColors(); // Enable ANSI colors for terminals
+  try {
+    final userJson = {
+      'name': 'Henry',
+      'age': 'not a number', // Wrong type
+    };
+    final user = User.fromJson(userJson);
+    log('✅ Success: $user\n');
+  } catch (e) {
+    log('❌ Error with colors: $e');
+  }
+  GuardTheme.disableColors(); // Disable colors again
+
+  // Example 10: Debug logging
+  log('═══ Example 10: Debug Mode ═══');
   Guard.setDebugLogging(true);
   log('Debug mode enabled: ${Guard.debug}');
   Guard.setDebugLogging(false);
